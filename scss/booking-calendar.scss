@@ -1,0 +1,83 @@
+.bc-wrapping {
+	font-size: 20px;
+      font-weight: 200;
+	display: flex;
+
+	max-width:  500px;
+	min-height:  500px;
+	/* background-color: red; */
+
+	flex-direction: column;
+	justify-content: center;
+}
+
+/* Flex items - bc-header og bc-body*/
+.bc-wrapping > * {
+	width:  100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.bc-header {
+	flex:  1;
+	background-color: blue;
+}
+
+.bc-body {
+	flex:  3;
+	background-color: green;
+	flex-direction: column;
+}
+
+/* bc-item-header og bc-item */
+.bc-body > * {
+	display:  flex;
+	width:  100%;
+	flex:  1;
+	border:  red 1px solid;
+	align-items: stretch;
+	justify-content: center;
+}
+
+
+.bc-item-header {
+	flex-direction: column;
+	background-color: orange;
+}
+
+
+/* bc-week og bc-month*/
+.bc-item-header > *{
+	flex:  1;
+	display:  flex;
+	justify-content: center;
+	align-items: stretch; // For å få ukeheading til å fylle hele 
+}
+.bc-month {
+	align-items: center;  //For å få jan-2017 center
+}
+
+.bc-week> *{
+	display: flex;
+	flex:  1;
+	border:  1px dotted red;
+	justify-content: center;
+	align-items: center;
+}
+
+.bc-item {
+	background-color: pink;
+}
+
+.bc-item > * {
+	display: flex;
+	flex:  1;
+	justify-content: center;
+	align-items: center; // For å få ukeheading til å fylle hele 
+	border:  1px solid grey;
+}
+
+
+
+
