@@ -1,3 +1,27 @@
+/* Definere farger celler*/
+$item-bg: lightgray;
+$item-bg-hover: red;
+$item-font: black;
+$item-font-hover: white;
+$item-border: darkgray;
+$item-border-hover: black;
+
+/* Colors for  weeknumbers*/
+$week-number-bg: red;
+$week-number-bg-hover: blue;
+$week-number-font: white;
+$week-number-font-hover: red;
+$week-number-border: gray;
+
+/* Colors for table heading */
+$week-heading-bg: gray;
+$week-heading-font: darkgray;
+$week-heading-border: gray;
+
+/* Header and arbound colors */
+$header-bg: lightgray;
+$header-font: black;
+
 .bc-wrapping {
 	font-size: 20px;
       font-weight: 200;
@@ -21,12 +45,14 @@
 
 .bc-header {
 	flex:  1;
-	background-color: blue;
+	background-color: $header-bg;
+	color: $header-font;
+	font-size: 30px;
 }
 
 .bc-body {
 	flex:  3;
-	background-color: green;
+	/* background-color: green; */
 	flex-direction: column;
 }
 
@@ -35,7 +61,7 @@
 	display:  flex;
 	width:  100%;
 	flex:  1;
-	border:  red 1px solid;
+	/* border:  red 1px solid; */
 	align-items: stretch;
 	justify-content: center;
 }
@@ -43,7 +69,8 @@
 
 .bc-item-header {
 	flex-direction: column;
-	background-color: orange;
+	background-color: $week-heading-bg;
+	color: $week-heading-font;
 }
 
 
@@ -56,28 +83,66 @@
 }
 .bc-month {
 	align-items: center;  //For å få jan-2017 center
+	font-weight: 700;
 }
 
 .bc-week> *{
 	display: flex;
 	flex:  1;
-	border:  1px dotted red;
+	border:  1px solid $week-heading-border;
 	justify-content: center;
 	align-items: center;
 }
 
 .bc-item {
-	background-color: pink;
+	background-color: $item-bg;
+	color:  $item-font;
+
 }
 
+/* bc-weekday og  bc-week-number */
 .bc-item > * {
 	display: flex;
 	flex:  1;
 	justify-content: center;
 	align-items: center; // For å få ukeheading til å fylle hele 
-	border:  1px solid grey;
+	/* border:  1px solid red; */
+	transition: 0.3s all ease-in-out;
 }
 
+.bc-weekday {
+	border: 1px solid $item-border;
+}
+
+.bc-weekday:hover {
+	background-color: $item-bg-hover;
+	color:  $item-font-hover;
+	border: 1px solid $item-border-hover;
+	font-weight: 900;
+
+}
+
+
+.bc-week-number {
+	background-color: $week-number-bg;
+	color: $week-number-font;
+	border:  1px solid $week-number-border;
+}
+
+/* 
+.bc-week-number ~ .bc-weekday  {
+    background-color: #a04f4f;
+}  */
+
+/* Påvirke alle ukedagene for en gitt uke for å indikere at man velger hele uken */
+.bc-week-number:hover ~ .bc-weekday  {
+    background-color: $item-bg-hover;
+    color:  $item-font-hover;
+    border:  1px solid $item-border-hover;
+}
+/* .bc-weekday :hover + .bc-week-number {
+    background-color: #444;
+} */
 
 
 
