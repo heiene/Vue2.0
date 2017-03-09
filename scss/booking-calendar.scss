@@ -1,34 +1,60 @@
+$light-border: #aaa;
+$light-bg: #eee;
+
 /* Definere farger celler*/
-$item-bg: lightgray;
-$item-bg-hover: red;
-$item-font: black;
+$item-bg:  #eee;
+$item-bg-hover: #999;
+$item-font: #777;
 $item-font-hover: white;
-$item-border: darkgray;
-$item-border-hover: black;
+$item-border: #ddd;
+$item-border-hover: #777;
 
 /* Colors for  weeknumbers*/
-$week-number-bg: red;
-$week-number-bg-hover: blue;
-$week-number-font: white;
-$week-number-font-hover: red;
-$week-number-border: gray;
+$week-number-bg: #ddd;
+$week-number-bg-hover: #777;
+$week-number-font: black;
+$week-number-font-hover: white;
+$week-number-border: #ccc;
+$week-number-border-hover: #555;
 
 /* Colors for table heading */
-$week-heading-bg: gray;
-$week-heading-font: darkgray;
-$week-heading-border: gray;
+$week-heading-bg: #ccc;
+$week-heading-font: #666;
+$week-heading-border: #ccc;
 
 /* Header and arbound colors */
-$header-bg: lightgray;
+$header-bg: #eee;
 $header-font: black;
 
+/* Farger for booking */
+$available: green;
+$reserved: #888;
+$booked: red;
+
+.bc-outer {
+	background-color: $light-bg;
+	
+	min-height:  500px;
+	display:  flex;
+	padding:  20px;
+	width:  100%;
+	@media screen and (min-width: 440px){
+		max-width:  400px;
+	}
+
+	@media screen and (max-width: 400px){
+		padding-left:  2px;
+		padding-right:  2px;
+	}
+}
+
 .bc-wrapping {
-	font-size: 20px;
+	font-size: 15px;
       font-weight: 200;
 	display: flex;
+	flex:  1;
+	border:  1px solid $light-border;
 
-	max-width:  500px;
-	min-height:  500px;
 	/* background-color: red; */
 
 	flex-direction: column;
@@ -48,12 +74,29 @@ $header-font: black;
 	background-color: $header-bg;
 	color: $header-font;
 	font-size: 30px;
+	justify-content: flex-end;
+	display:  flex;
+}
+.bc-clear {
+	flex: 1;
+}
+.bc-navigation {
+	flex: 1;
+	justify-content: flex-end;
+	display:  flex;
+}
+
+.bc-button {
+	width:  90px;
+	margin:  10px;
 }
 
 .bc-body {
-	flex:  3;
+	flex:  6;
 	/* background-color: green; */
 	flex-direction: column;
+	border-top:  1px solid $light-border;
+	border-bottom:  1px solid $light-border;
 }
 
 /* bc-item-header og bc-item */
@@ -86,6 +129,7 @@ $header-font: black;
 	font-weight: 700;
 }
 
+/* ma -fri feltene */
 .bc-week> *{
 	display: flex;
 	flex:  1;
@@ -107,7 +151,8 @@ $header-font: black;
 	justify-content: center;
 	align-items: center; // For å få ukeheading til å fylle hele 
 	/* border:  1px solid red; */
-	transition: 0.3s all ease-in-out;
+	transition: 0.2s all ease-in-out;
+	cursor:  pointer;
 }
 
 .bc-weekday {
@@ -118,8 +163,15 @@ $header-font: black;
 	background-color: $item-bg-hover;
 	color:  $item-font-hover;
 	border: 1px solid $item-border-hover;
-	font-weight: 900;
+	font-weight: 500;
+}
 
+/* Gir klassen disable til de tomme dagene i kalender */
+.bc-disabled:hover {
+	background-color: $item-bg;
+	color:  $item-font;
+	border: 1px solid $item-border;
+	cursor: not-allowed; 
 }
 
 
@@ -127,6 +179,12 @@ $header-font: black;
 	background-color: $week-number-bg;
 	color: $week-number-font;
 	border:  1px solid $week-number-border;
+}
+
+.bc-week-number:hover {
+	background-color: $week-number-bg-hover;
+	color: $week-number-font-hover;
+	border:  1px solid $week-number-border-hover;
 }
 
 /* 
@@ -138,11 +196,48 @@ $header-font: black;
 .bc-week-number:hover ~ .bc-weekday  {
     background-color: $item-bg-hover;
     color:  $item-font-hover;
-    border:  1px solid $item-border-hover;
+    border:  1px solid $item-bg-hover;;
 }
 /* .bc-weekday :hover + .bc-week-number {
     background-color: #444;
 } */
 
+.bc-footer {
+	flex:  1;
+	display:  flex;
+}
 
+.bc-explain {
+	display: flex;
+	flex: 1;
+	justify-content: center;
+	transition: all 0.2s ease-in-out;
+}
+
+.bc-explain:hover {
+	font-size: 20px;
+	font-weight: 400;
+	/* line-height: 20px; */
+}
+
+.bc-box {
+	border: 1px solid $item-border;
+	height:  20px;
+	width:  20px;
+}
+
+.bc-text {
+	padding-left: 5px;
+}
+.bc-available {
+	background-color: $available;
+}
+
+.bc-reserved {
+	background-color: $reserved;
+}
+
+.bc-booked {
+	background-color: $booked;
+}
 

@@ -3,14 +3,33 @@
 /* Colors for  weeknumbers*/
 /* Colors for table heading */
 /* Header and arbound colors */
+/* Farger for booking */
+.bc-outer {
+  background-color: #eee;
+  min-height: 500px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 20px;
+  width: 100%; }
+  @media screen and (min-width: 440px) {
+    .bc-outer {
+      max-width: 400px; } }
+  @media screen and (max-width: 400px) {
+    .bc-outer {
+      padding-left: 2px;
+      padding-right: 2px; } }
+
 .bc-wrapping {
-  font-size: 20px;
+  font-size: 15px;
   font-weight: 200;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  max-width: 500px;
-  min-height: 500px;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  border: 1px solid #aaa;
   /* background-color: red; */
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
@@ -37,19 +56,47 @@
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
-  background-color: lightgray;
+  background-color: #eee;
   color: black;
-  font-size: 30px; }
+  font-size: 30px;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; }
+
+.bc-clear {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1; }
+
+.bc-navigation {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; }
+
+.bc-button {
+  width: 90px;
+  margin: 10px; }
 
 .bc-body {
-  -webkit-box-flex: 3;
-      -ms-flex: 3;
-          flex: 3;
+  -webkit-box-flex: 6;
+      -ms-flex: 6;
+          flex: 6;
   /* background-color: green; */
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
-          flex-direction: column; }
+          flex-direction: column;
+  border-top: 1px solid #aaa;
+  border-bottom: 1px solid #aaa; }
 
 /* bc-item-header og bc-item */
 .bc-body > * {
@@ -73,8 +120,8 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  background-color: gray;
-  color: darkgray; }
+  background-color: #ccc;
+  color: #666; }
 
 /* bc-week og bc-month*/
 .bc-item-header > * {
@@ -97,6 +144,7 @@
           align-items: center;
   font-weight: 700; }
 
+/* ma -fri feltene */
 .bc-week > * {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -104,7 +152,7 @@
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
-  border: 1px solid gray;
+  border: 1px solid #ccc;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -113,8 +161,8 @@
           align-items: center; }
 
 .bc-item {
-  background-color: lightgray;
-  color: black; }
+  background-color: #eee;
+  color: #777; }
 
 /* bc-weekday og  bc-week-number */
 .bc-item > * {
@@ -131,22 +179,35 @@
       -ms-flex-align: center;
           align-items: center;
   /* border:  1px solid red; */
-  -webkit-transition: 0.3s all ease-in-out;
-  transition: 0.3s all ease-in-out; }
+  -webkit-transition: 0.2s all ease-in-out;
+  transition: 0.2s all ease-in-out;
+  cursor: pointer; }
 
 .bc-weekday {
-  border: 1px solid darkgray; }
+  border: 1px solid #ddd; }
 
 .bc-weekday:hover {
-  background-color: red;
+  background-color: #999;
   color: white;
-  border: 1px solid black;
-  font-weight: 900; }
+  border: 1px solid #777;
+  font-weight: 500; }
+
+/* Gir klassen disable til de tomme dagene i kalender */
+.bc-disabled:hover {
+  background-color: #eee;
+  color: #777;
+  border: 1px solid #ddd;
+  cursor: not-allowed; }
 
 .bc-week-number {
-  background-color: red;
+  background-color: #ddd;
+  color: black;
+  border: 1px solid #ccc; }
+
+.bc-week-number:hover {
+  background-color: #777;
   color: white;
-  border: 1px solid gray; }
+  border: 1px solid #555; }
 
 /* 
 .bc-week-number ~ .bc-weekday  {
@@ -154,10 +215,52 @@
 }  */
 /* Påvirke alle ukedagene for en gitt uke for å indikere at man velger hele uken */
 .bc-week-number:hover ~ .bc-weekday {
-  background-color: red;
+  background-color: #999;
   color: white;
-  border: 1px solid black; }
+  border: 1px solid #999; }
 
 /* .bc-weekday :hover + .bc-week-number {
     background-color: #444;
 } */
+.bc-footer {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; }
+
+.bc-explain {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out; }
+
+.bc-explain:hover {
+  font-size: 20px;
+  font-weight: 400;
+  /* line-height: 20px; */ }
+
+.bc-box {
+  border: 1px solid #ddd;
+  height: 20px;
+  width: 20px; }
+
+.bc-text {
+  padding-left: 5px; }
+
+.bc-available {
+  background-color: green; }
+
+.bc-reserved {
+  background-color: #888; }
+
+.bc-booked {
+  background-color: red; }
