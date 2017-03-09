@@ -92,12 +92,12 @@ Vue.component('booking-calendar', {
 			return this.cellId[row][cell];
 		},
 		/*Funksjon for å legge til en klasse på en celle basert på celle id*/
-		setCellClass: function(addClass,id) {
+		setCellClass: function(id,addClass) {
 			document.querySelector(`#${id}`).classList.add(addClass);
 		},
 		/*Funksjon for å fjerne en klasse fra en celle basert på celle-id*/
-		removeCellClass: function(removeClass,id) {
-			document.querySelector(`#${id}`).classList.remove(removeClass);
+		removeCellClass: function(id,remClass) {
+			document.querySelector(`#${id}`).classList.remove(remClass);
 		}
 		
 	},
