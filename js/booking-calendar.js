@@ -102,6 +102,7 @@ Vue.component('booking-calendar', {
 		
 	},
 	mounted: function() {
+		console.table(this.cellId);
 		
 	}
 
