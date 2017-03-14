@@ -5,7 +5,7 @@ Vue.component('booking-calendar', {
 			<div class="bc-wrapping" >
 				<div class="bc-header">
 					<div class="bc-clear">
-						<button class="btn btn-default bc-button">Klarer</button>	
+						<button class="btn btn-default bc-button" v-on:click="clear">Klarer</button>	
 					</div>
 					<div class="bc-navigation">
 						<button class="btn btn-primary bc-button"><i class="fa  fa-chevron-left"></i> forrige</button>
@@ -117,16 +117,58 @@ Vue.component('booking-calendar', {
 		/*Funksjon for å fjerne en klasse fra en celle basert på celle-id*/
 		removeCellClass: function(id,remClass) {
 			document.querySelector(`#${id}`).classList.remove(remClass);
+		},
+
+		/*
+		| Her kommer funksjoner som trigges av bruker
+		*/
+		
+		//Gå til neste måned
+		nextMonth: function() {
+
+		},
+
+		//Gå til forrige måned
+		previousMonth: function () {
+
+		},
+		//Bruker trykker på en dato
+		//Her kan en av fire ting skje (etter at man gjør en sjekk på om trykket er gyldig):
+		/*
+			1: Første trykk, ingen datoer valg
+				- base date settes
+				- dato i from date picker skal oppdateres
+				- man er i "active" mode - altså en dato er valgt, neste gang skal man vurdere opp mot den
+			2: Man trykker på tidligere valgt dato
+				- base date fjernes
+				- dato i from picker fjernes (og evt to date?)
+				- man er i passive mode (bruker har ennå ikke foretatt seg noe)
+			3: Man trykker på dato etter den som tidligere var valgt (base date)
+				- from date beholdes
+				- to date settes til ny dato
+				- man går over i "toggle" mode, altså begge datoer er satt, men man kan trykke frem og tilbake
+			4: Man trykker på dato som er før den som tidligere var valgt (base date)
+				- from date endres til ny dato
+				- to date settes til tidigere valgt dato
+				- man går over i "toggle" mode, altså begge datoer er satt, men man kan trykke frem og tilbake
+		*/
+		selectDate: function() {
+
+		},
+
+		//Cleare all data
+		clear: function() {
+			
 		}
 		
 	},
 	mounted: function() {
-		console.table(this.cellId);
-		
+		console.table(this.cellId);	
 	}
 
 })
 
+// Bør ut i egen fil evt
 Vue.component('booking-date-picker', {
 	props: {
 		formValue: {
@@ -161,24 +203,24 @@ Vue.component('booking-date-picker', {
 	},
 	data: function () {
 		return {
-				format: "dd-mm-yyyy",
-				disabledDates: [],
-				previousDate: null,
-				// requestFeedback: false,
-				// awatingFeedback: false,
-				// dateChangeOrigin: 'internal' // Assuming internal events as default
+			format: "dd-mm-yyyy",
+			disabledDates: [],
+			previousDate: null,
+			// requestFeedback: false,
+			// awatingFeedback: false,
+			// dateChangeOrigin: 'internal' // Assuming internal events as default
 		}
 	},
 	template:   
 	`
 		<div>
 			<input :id="elementId" 
-					type="text" 
-					:name="formName" 
-					class="form-control date-pick" 
-					v-on:change="dateChanged" 
-					:value="formValue" 
-					:placeholder="elementPlaceholder"
+				type="text" 
+				:name="formName" 
+				class="form-control date-pick" 
+				v-on:change="dateChanged" 
+				:value="formValue" 
+				:placeholder="elementPlaceholder"
 			>
 		</div>
 	`
@@ -205,32 +247,41 @@ Vue.component('booking-date-picker', {
 		},
 		hide: function() {
 			document.querySelector('#'+this.elementId).datepicker('hide');
+		},
+		fuckOn: function () {
+			console.log('fuck was called');
 		}
 	},
-		mounted: function() {
-			var that = this;
-			this.disabledDates = this.reservedDates.concat(this.confirmedDates);
+	mounted: function() {
+		var that = this;
+		this.disabledDates = this.reservedDates.concat(this.confirmedDates);
 
-			if (! (this.elementId && this.formName)) {
-					console.log("You must specify element-id and form-name attributes.");
-			}
+		this.$on('fuck', function() {
+			console.log('fukc was coallded');
+		});
 
-			if (! this.elementPlaceholder ) {
-					this.elementPlaceholder = this.format;
-			}
 
-			//Define properties for datepicker
-			$('.date-pick').datepicker({
-					autoclose: true,
-					orientation: this.orientation || 'bottom left',
-					format: this.format,
-					language: 'no-NO',
-					weekStart: 1,
-					todayHighlight: true,
-					startDate: this.startDate || moment().startOf('day').format("DD-MM-YYYY"),
-					datesDisabled: this.disabledDates || null
-			});
-			
+
+		if (! (this.elementId && this.formName)) {
+				console.log("You must specify element-id and form-name attributes.");
+		}
+
+		if (! this.elementPlaceholder ) {
+				this.elementPlaceholder = this.format;
+		}
+
+		//Define properties for datepicker
+		$('.date-pick').datepicker({
+			autoclose: true,
+			orientation: this.orientation || 'bottom left',
+			format: this.format,
+			language: 'no-NO',
+			weekStart: 1,
+			todayHighlight: true,
+			startDate: this.startDate || moment().startOf('day').format("DD-MM-YYYY"),
+			datesDisabled: this.disabledDates || null
+		});
+		
 	}
 });
 

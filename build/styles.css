@@ -278,8 +278,8 @@
       max-width: 400px; } }
   @media screen and (max-width: 400px) {
     .bc-picker {
-      padding-left: 2px;
-      padding-right: 2px; } }
+      padding-left: 0px;
+      padding-right: 0px; } }
 
 .bc-picker > * {
   -webkit-box-flex: 1;
