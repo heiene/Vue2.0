@@ -249,7 +249,7 @@
   /* line-height: 20px; */ }
 
 .bc-box {
-  border: 1px solid #ddd;
+  border: 1px solid #aaa;
   height: 20px;
   width: 20px; }
 
@@ -257,10 +257,45 @@
   padding-left: 5px; }
 
 .bc-available {
-  background-color: green; }
+  background-color: #eee; }
 
 .bc-reserved {
   background-color: #888; }
 
 .bc-booked {
   background-color: red; }
+
+/* Datepicker saker i kalender*/
+.bc-picker {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  padding: 15px;
+  background-color: #eee; }
+  @media screen and (min-width: 440px) {
+    .bc-picker {
+      max-width: 400px; } }
+  @media screen and (max-width: 400px) {
+    .bc-picker {
+      padding-left: 2px;
+      padding-right: 2px; } }
+
+.bc-picker > * {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  padding: 5px;
+  border-radius: 0px; }
+
+/* Datepicker spesifikt */
+.datepicker {
+  padding: 20px;
+  border-radius: 0; }
+  .datepicker td {
+    padding: 30px;
+    width: 14.2%; }
+  .datepicker td.day {
+    border-radius: 0; }
+  .datepicker td.active {
+    background-color: #ccc; }

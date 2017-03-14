@@ -1,6 +1,6 @@
 Vue.component('booking-calendar', {
 	template: 
-	`	
+	`<div> <!-- bare for å ha et root elemnent når datepicker er med-->
 		<div class="bc-outer">
 			<div class="bc-wrapping" >
 				<div class="bc-header">
@@ -62,8 +62,27 @@ Vue.component('booking-calendar', {
 						</div>
 					</div>
 				</div> <!--bc-footer ferdig-->
-			</div>	<!--bc-wrapping ferdig-->
-		</div> <!--bc-outer ferdig-->	
+			</div>	<!--bc-wrapping ferdig-->		
+		</div> <!--bc-outer ferdig-->
+		<div class="bc-picker">
+			<div class="bc-picker-from">
+				<booking-date-picker
+					element-id="test"
+					form-name="test-pick"
+					element-placeholder="from"
+					orientation="bottom left"
+				></booking-date-picker>
+			</div>
+			<div class="bc-picker-to">
+				<booking-date-picker
+					element-id="test"
+					form-name="test-pick"
+					element-placeholder="to"
+					orientation="bottom right"
+				></booking-date-picker>
+			</div>	
+		</div> <!-- bc-picker slutt -->		
+	</div>
 	`,
 	props: ['test'],
 	computed: {
@@ -107,6 +126,113 @@ Vue.component('booking-calendar', {
 	}
 
 })
+
+Vue.component('booking-date-picker', {
+	props: {
+		formValue: {
+			type: String
+		},
+		formName: { // the value of the name="" attribute in the form
+			type: String
+		},
+		elementId: { // the value of the id="" attribute of the input element
+			type: String
+		},
+		orientation: { // Placement of date picker. Ex: top left
+			type: String
+		},
+		elementPlaceholder: { // Placeholder in input field
+			type: String
+		},
+		classes: { // classes for the input element,
+			type: String
+		},
+		startDate: {
+			type: String
+		},
+		confirmedDates: {
+			type: Array,
+			default: function () { return [] }
+		},
+		reservedDates: {
+			type: Array,
+			default: function () { return [] }
+		} 
+	},
+	data: function () {
+		return {
+				format: "dd-mm-yyyy",
+				disabledDates: [],
+				previousDate: null,
+				// requestFeedback: false,
+				// awatingFeedback: false,
+				// dateChangeOrigin: 'internal' // Assuming internal events as default
+		}
+	},
+	template:   
+	`
+		<div>
+			<input :id="elementId" 
+					type="text" 
+					:name="formName" 
+					class="form-control date-pick" 
+					v-on:change="dateChanged" 
+					:value="formValue" 
+					:placeholder="elementPlaceholder"
+			>
+		</div>
+	`
+	,
+	methods: {	
+		dateChanged: function() {
+			console.log("date changed!");
+		},
+		setDate: function(date) {
+			document.querySelector('#'+this.elementId).datepicker('setDate',date);
+		},
+		getDate: function() {
+			return document.querySelector('#'+this.elementId).datepicker('getDate');
+		},
+		setStartDate: function(startDate) {
+			document.querySelector('#'+this.elementId).datepicker('setStartDate',startDate);
+		},
+		getStartDate: function() {
+			console.log("TRIIGGERD");
+			return document.querySelector('#'+this.elementId).datepicker('getStartDate');
+		},
+		show: function() {
+			document.querySelector('#'+this.elementId).datepicker('show');
+		},
+		hide: function() {
+			document.querySelector('#'+this.elementId).datepicker('hide');
+		}
+	},
+		mounted: function() {
+			var that = this;
+			this.disabledDates = this.reservedDates.concat(this.confirmedDates);
+
+			if (! (this.elementId && this.formName)) {
+					console.log("You must specify element-id and form-name attributes.");
+			}
+
+			if (! this.elementPlaceholder ) {
+					this.elementPlaceholder = this.format;
+			}
+
+			//Define properties for datepicker
+			$('.date-pick').datepicker({
+					autoclose: true,
+					orientation: this.orientation || 'bottom left',
+					format: this.format,
+					language: 'no-NO',
+					weekStart: 1,
+					todayHighlight: true,
+					startDate: this.startDate || moment().startOf('day').format("DD-MM-YYYY"),
+					datesDisabled: this.disabledDates || null
+			});
+			
+	}
+});
 
 new Vue({
 	el: '#booking-test'
